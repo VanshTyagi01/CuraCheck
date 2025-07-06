@@ -2,12 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "backend/app.py",
+      "src": "api/index.py",
       "use": "@vercel/python",
       "config": {
         "maxLambdaSize": "50mb",
-        "runtime": "python3.11",
-        "maxDuration": 30
+        "runtime": "python3.9"
       }
     },
     {
@@ -18,7 +17,23 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/backend/app.py"
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/predict",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/health",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/symptoms",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/retrain",
+      "dest": "/api/index.py"
     },
     {
       "src": "/images/(.*)",
@@ -32,8 +47,5 @@
       "src": "/",
       "dest": "/frontend/index.html"
     }
-  ],
-  "env": {
-    "PYTHONPATH": "/var/task"
-  }
+  ]
 }
